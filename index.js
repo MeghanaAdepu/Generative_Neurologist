@@ -8,17 +8,12 @@ const dotenv = require("dotenv");
 dotenv.config();
 app.use(express.json());
 
-app.use(cors({
-    origin:"*",
-    credentials: true
-}));
 
-app.options('*', cors(
-    {
-      origin: '*',
-      credentials:true
-    }
-  ));
+let corspolicy = {
+    origin:"http://localhost:3000"
+}
+app.use(cors(corspolicy));
+
 
 app.use((req,res,next) => {
     console.log(" Request received at " + (new Date()));
@@ -47,7 +42,7 @@ app.use('/',allroutes);
 // schema
 // model
 // from middleware, use model to get data from DB
-const port = process.env.PORT || 3000; // Use the port provided by Vercel
+const port = process.env.PORT || 3001; // Use the port provided by Vercel
 app.listen(port, () => {
     console.log(`Backend server listening at port ${port}`);
 });
